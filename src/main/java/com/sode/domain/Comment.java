@@ -15,15 +15,26 @@ public class Comment implements Serializable{
 
 	@Id
 	private String id;
+
+	private Post post;
 	private String text;
 	private Instant date;
 	
 	public Comment() {}
 	
-	public Comment(String id, String text, Instant date) {
+	public Comment(String id, Post post, String text, Instant date) {
 		this.id = id;
+		this.post = post;
 		this.text = text;
 		this.date = date;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public String getId() {

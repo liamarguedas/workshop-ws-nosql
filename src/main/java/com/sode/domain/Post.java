@@ -1,5 +1,6 @@
 package com.sode.domain;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -7,23 +8,36 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-
 @Document(collection = "post")
-public class Post {
+public class Post implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
+	
+	
+	private User author;
 	private Instant date;
 	private String title;
 	private String body;
 	
 	public Post() {}
 	
-	public Post(String id, Instant date, String title, String body) {
+	public Post(String id, User author, Instant date, String title, String body) {
 		this.id = id;
+		this.author = author;
 		this.date = date;
 		this.title = title;
 		this.body = body;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	public String getId() {
