@@ -28,11 +28,11 @@ public class UserService {
 		return list;
 	}
 
-	public UserDTO findById(String id) {
+	public User findById(String id) {
 
 		User usr = repository.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
 
-		return new UserDTO(usr);
+		return usr;
 	}
 
 	public UserDTO insert(UserDTO usr) {
@@ -51,7 +51,7 @@ public class UserService {
 
 	public UserDTO update(String id, UserDTO updatedUsr) {
 		
-		User storedUsr = fromDTO(findById(id));
+		User storedUsr = findById(id);
 		updateUser(storedUsr, fromDTO(updatedUsr));
 		
 		return new UserDTO(repository.save(storedUsr));
